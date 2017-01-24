@@ -124,21 +124,35 @@
 
   <script>
     const panels = document.querySelectorAll('.panel');
+    
+    var lastPanel = null;
 
-    function toggleOpen() {
-      console.log('Hello');
-      this.classList.toggle('open');
+    function toggleOpen(e) 
+    {
+      this.classList.add('open');
+      if(lastPanel)
+      {
+        lastPanel.classList.remove('open');   
+      }
+      lastPanel = this;
+      console.log(lastPanel)
     }
 
-    function toggleActive(e) {
+    function toggleActive(e) 
+    {
       console.log(e.propertyName);
-      if (e.propertyName.includes('flex')) {
-        this.classList.toggle('open-active');
+      if (e.propertyName.includes('flex')) 
+      {
+          this.classList.toggle('open-active');
+          
+          console.log(lastPanel);
+      
       }
     }
 
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+    
   </script>
 
 </body>

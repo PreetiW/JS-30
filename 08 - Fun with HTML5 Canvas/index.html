@@ -5,11 +5,22 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
+    Brush Width: <input type="number"  id="user_input" > 
+   <button id="change_value_button">Change Value </button>
+  <canvas id="draw" width="800" height="800"></canvas>
 <script>
 
 const canvas = document.querySelector('#draw');
 const context = canvas.getContext('2d');
+const changeButton = document.querySelector('#change_value_button');
+
+var userLineWidth = 50;
+
+changeButton.addEventListener("click" , function()
+{
+    userLineWidth = document.querySelector('#user_input').value;
+    
+});
 
 canvas.width =  window.innerWidth;
 canvas.height = window.innerHeight;
@@ -17,7 +28,7 @@ canvas.height = window.innerHeight;
 context.strokeStyle = '#BADA55';
 context.lineJoin = 'round';
 context.lineCap = 'round';
-context.lineWidth = 50;
+context.lineWidth = userLineWidth;
 
 let isDrawing = false;
 let lastX = 0;
@@ -25,22 +36,33 @@ let lastY = 0;
 let hue = 0;
 let direction = true;
 
-function draw(e){ 
+function draw(e)
+{ 
     if(!isDrawing) return;
   context.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   context.beginPath();
   context.moveTo(lastX, lastY);
   context.lineTo(e.offsetX, e.offsetY);
   context.stroke();
-  
+  context.lineWidth = userLineWidth;
 
-  [lastX, lastY] = [e.offsetX, e.offsetY];
+  console.log(userLineWidth);
+
+ // [lastX, lastY] = [e.offsetX, e.offsetY];
+ console.log(e);
+ const {lastX: offsetX, lastY: offsetY } = e
+
+ //const {offsetX: lastXX, offsetY: lastYY } = e
+ console.log(offsetX);
+ console.log(offsetY);
+ //console.log(lastX);
+ //console.log(lastY);
 
   hue++;
   if (hue >= 360) {
     hue = 0;
   }
-  if (context.lineWidth >= 100 || context.lineWidth <= 1) {
+  if (context.lineWidth >= userLineWidth || context.lineWidth <= 1) {
     direction = !direction;
   }
 
