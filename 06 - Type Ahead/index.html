@@ -31,12 +31,12 @@ function findMatches(wordToMatch, cities)
       return place.city.match(regex) || place.state.match(regex);
   });
 }
-/*
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
-*/
-function numberWithCommas(x) 
+
+/*function numberWithCommas(x) 
 {
     x = x.toString();
     var lastThree = x.substring(x.length-3);
@@ -47,8 +47,9 @@ function numberWithCommas(x)
         var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
  
         return res;
+    }
 }
-
+*/
 
 function displayMatches()
 {
