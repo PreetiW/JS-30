@@ -121,12 +121,16 @@
   {
   
     let inBetween = false;
+    if(lastChecked == null)
+    {
+      console.log('lastChecked null');
+    }
 
-    if(e.shiftKey && this.checked)
+    if(e.shiftKey && lastChecked != null && this.checked)
     { 
         checkboxes.forEach(checkbox =>{
 
-          if(checkbox === lastChecked || checkbox === this)
+          if((checkbox === lastChecked  || checkbox === this) && this !== lastChecked)
           {
             inBetween = !inBetween;
           }
@@ -140,8 +144,10 @@
         });
        
     }   
-    console.log(e);
+    
     lastChecked = this;
+    
+    
     this.checked ? count++ : count --;
     
     status.innerHTML = `Nice work! ${count} tasks are already done!`;
